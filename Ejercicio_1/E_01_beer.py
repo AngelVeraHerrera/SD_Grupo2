@@ -93,8 +93,7 @@ class Bottles_Sing():
     def __print_file(self, verse_1, verse_2):
         if self.tittle:
             self.archive = open("99_Bottles_Of_Beer_song", "w")
-            global archive        # Very important for use the file 
-                                  #  in all the class!!
+            
             self.archive.write('***************************************\n')
             self.archive.write('**    "99 BOTTLES OF BEER"  SONG     **\n')
             self.archive.write('***************************************\n*\n*\n')
