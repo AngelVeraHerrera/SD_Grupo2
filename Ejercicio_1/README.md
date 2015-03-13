@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------
-**Archivo:** E_01_beer.py  -> Necesario que módulo utilidades_varias.py se encuentre en el mismo nivel.
+**Archivo:** E_01_beer.py  -> Necesario que módulo **utilidades_varias.py** se encuentre en el mismo nivel.
 
 **Autor:** Ángel Vera Herrera, Ana Pastor Sánchez
 
