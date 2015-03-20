@@ -2,7 +2,7 @@ Archivo: E_02_pokemon.py -> Necesario que módulo utilidades_varias.py se encuen
 
 Autor: Ángel Vera Herrera, Ana Pastor Sánchez
 
-Fecha: 19 de marzo de 2015
+Fecha: 20 de marzo de 2015
 
 Versión: v1
 
