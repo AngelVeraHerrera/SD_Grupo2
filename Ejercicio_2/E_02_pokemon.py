@@ -1,139 +1,112 @@
 # -*- encoding: utf-8 -*-
 '''
 --------------------------------------------------------------------------------------------------
-# Archivo: E_01_beer.py
+# Archivo: E_02_pokemon.py
 #
 # Autor: Ángel Vera Herrera, Ana Pastor Sánchez
 #
-# Fecha: 13 de marzo de 2015
+# Fecha: 19 de marzo de 2015
 #
-# Versión: v3
+# Versión: v1
 #
-# Descripción: Ejercicio 01, "Botella de Ron"
-#  Este programa canta la famosa canción "99 Bottles of beer".
-#  Cuenta con varias opciones, como imprimir por pantalla la
-#   canción entera, o imprimirlas en un fichero.
+# Descripción: Ejercicio 02, "Trabajando con Pokemon"
+#  Este programa, a partir de una lista de palabras, encuentra la lista más larga 
+#  posible de palabras encadenadas (la última letra de una palabra coincide con la 
+#  primera de la siguiente palabra). 
 #
-# Notas de la versión: El programa tiene funcionalidades extras a las solicitadas, como un 
-#  menú, uso de clases, tratamiento de ficheros, llamadas al sistema, importar de una 
-#  librería creada por ti, etc. Consultamos el incluir o no estas funciones con el docente
-#  y le pareció adecuado incluirlas para que veáis algunos aspectos nuevos de Python.
-#  Por ese motivo, hay algunas sentencias "pythonianas" como la que controla que se imprima 
-#  "bottle" o "bottles" o el control de flujo "switch case" que a lo mejor chocan si las 
-#  comparamos con sentencias de otros lenguajes de programación. 
-#  ¡Esperamos que os guste y os sirva para aplicar estos aspectos en los próximos programas!
-#
-# Notas de la canción: Hemos añadido los dos últimos versos que suele tener la canción tradicional =P
+# Notas de la versión: Para probar el programa, se hará uso de una lista de palabras 
+#   que se encuentran en el fichero pokemon.txt.
 --------------------------------------------------------------------------------------------------
 '''
+
 
 ''' 
 # --- MODULES --------------------------------
 '''
-import os 
+import utilidades_varias
 
-import sys
-
-import re
 
 ''''
 # --- FUNCTIONS --------------------------------
 '''
-''''
+
 # Principal Menu -> Print a Menu in the terminal
 def intro():
-    utilidades_varias.clear() # Clear the terminal
-    print '***************************************'
-    print '**     "99 BOTTLES OF BEER"  v3      **'
-        print '**       by A. Vera & A.Pastor       **'
-        print '***************************************'
-        print '* Choose an option:                *'
-        print '*----------------------------------*'
-        print '*  1) Print the song in terminal   *'
-        print '*  2) Print the song in a file     *'  
-        print '*  3) Exit                         *'
-        print '************************************'
-        option = int(input('Selection -> '))  # For input
-        utilidades_varias.clear()
-        if option not in range(1,4):
-            utilidades_varias.opcion_incorrecta() # Incorrect option 
-    return option 
+    utilidades_varias.clear()  # Clear the terminal
+    print '*****************************************'
+    print '**  "Chained Words Pokemon Edition!!"  **'
+    print '**       by A. Vera & A.Pastor         **'
+    print '*****************************************'
+    utilidades_varias.pres_to_continue()
+
+
 '''
-
-           
-         
-
-
-# ==========================================================================================>
-''' 
-# --- MAIN --------------------------------
-#
-# PRECONDICIONES: No se repiten palabras.
--------------------------------------------
+ * Cabecera: chainned_words(li_elements)
+ * 
+ * @param li_elements   Lista de palabras en las que
+ *                      vamos a buscar la cadena más 
+ *                      larga de encadenadas.
+ *
+ * @return Cadena más larga de encadenadas. 
+ *
+ * Notas: No se pueden saltear palabras que comiencen
+ *          por la misma letra. Solo se puede probar continue
+ *          la primera ocurrencia.
 '''
-
 def chainned_words(li_elements):
 
-    li_beg = [word[0] for word in li_elements] 
-    li_beg_aux = list(li_beg)
+  # VARIABLES LOCALES
+    # Lista con las letras iniciales de cada palabra.
+    li_beg = [word[0] for word in li_elements]  
 
+    # Lista con las letras finales de cada palabra.
     li_ends = [word[len(word)-1] for word in li_elements] 
 
-    li_result = []
+    # Lista de inciiales auxiliar 
+    li_beg_aux = list(li_beg)  # Muy importante el list()!! Si no, es una referencia.
+    li_result = []             # Resultado final
 
+    # Trabajamos mediante la correspondencia del índice con 
+    #  la posición en la que se encuentra una palabra.
     for i, end_letter in enumerate(li_ends):
         li_res_aux = []
         li_res_aux.append(li_elements[i])
+
         while (end_letter in li_beg_aux):
             index = li_beg_aux.index(end_letter)
             li_res_aux.append(li_elements[index])
             end_letter = li_ends[index]
-            li_beg_aux[index] = ' '
-      
+            li_beg_aux[index] = ' '   # Simbolicamente, eliminamos la "palabra"
+                                      # con la que hemos comparado.
+
+        # Si el la lista resultante es es más grande que la
+        # que tenemos almacenada como reusltado, la almacenamos.
         if (len(li_result) < len(li_res_aux)):
-            li_result= li_res_aux
+            li_result = list(li_res_aux) 
 
-        li_beg_aux = list(li_beg)
+        li_beg_aux = list(li_beg)  # Tras formar un resultado, recargamos la lista
+                                   # auxiliar y continuamos...
     return li_result
+           
+# ==========================================================================================>
+''' 
+-------------------------------------------
+# --- MAIN --------------------------------
+-------------------------------------------
+'''
+ 
+intro()
 
-
+# Abrimos el fichero. Importante la opcion "Ur"
 li_pokemons = open('pokemon.txt','Ur').read().split()
 
-print chainned_words(li_pokemons)
-            
-
-
-
-
-
-
-
-
-        
-
-
-#li.append(word)
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print '\n--------------------------------------------------------------------\n'
+print ' - '.join(chainned_words(li_pokemons))
+print '\n--------------------------------------------------------------------\n'   
+utilidades_varias.pres_to_continue()
+utilidades_varias.exit(0)         
 
 
 '''
-# Fin Archivo: E_01_beer.py
+# Fin Archivo: E_02_pokemon.py
 '''
