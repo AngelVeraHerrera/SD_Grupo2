@@ -60,7 +60,7 @@ def chainned_words(li_elements):
     li_beg = [word[0] for word in li_elements]  
 
     # Lista con las letras finales de cada palabra.
-    li_ends = [word[len(word)-1] for word in li_elements] 
+    li_ends = [word[-1] for word in li_elements] 
 
     # Lista de inciiales auxiliar 
     li_beg_aux = list(li_beg)  # Muy importante el list()!! Si no, es una referencia.
