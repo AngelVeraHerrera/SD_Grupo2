@@ -4,11 +4,11 @@
 --------------------------------------------------------------------------------------------------
 # Archivo: SDL_funciones.py
 #
-# Autor: Ángel Vera Herrera, Ana Pastor Sánchez
+# Autor: Ángel Vera, Ana Pastor, Gonzalo Lamas ,Jose Manuel Martínez
 #
-# Fecha: 
+# Fecha: 8 de junio de 2015
 #
-# Versión: v1
+# Versión: v2
 #
 # Descripción: Se implementan las funciones necesarias para la búsqueda de
 #              palabras en una sopa de letras
@@ -42,6 +42,11 @@ direcciones = ["Abajo-Arriba",
 ''' 
 # --- FUNCIONES --------------------------------
 '''
+#
+# Busca la coincidencia de la primera letra de una palabra
+#  en la sopa, y si la encuentra, realiza una llamada a
+#  una función encargada del procesamiento de la búsqueda
+#
 def buscar_palabra(sopa, palabra) :
 
     direccion = direcciones[8]
@@ -64,6 +69,10 @@ def buscar_palabra(sopa, palabra) :
     return resultado
 
 
+#
+# Llamada a la recursiva. Busca la palabra en todas las direcciones
+#  posibles a partir de una posición.
+#
 def analizar_coordenada(sopa,palabra,coord):
 
     salir = False
@@ -80,7 +89,9 @@ def analizar_coordenada(sopa,palabra,coord):
     return resultado
 
 
-
+#
+# Realiza la búsqueda de la palabra en una dirección concreta
+#
 def analizar_coordenada_rec(sopa,palabra,coord,direccion):
     
     x = coord['x']
@@ -109,6 +120,9 @@ def analizar_coordenada_rec(sopa,palabra,coord,direccion):
 	    return direcciones[8]
 
 
+#
+# Pone en mayúsculas todos los contenedores
+#
 def upper_all(sopadeletras, palabras) :
 
     for index, fila in enumerate(sopadeletras) :
@@ -117,7 +131,9 @@ def upper_all(sopadeletras, palabras) :
     for index, palabra in enumerate(palabras) :
         palabras[index] = palabra.upper() 
 
-
+#
+# Imprime el resultado de la búsqueda
+#
 def imprimir_resultado(result):
 
     if result['direccion'] is not direcciones[8] :
@@ -132,6 +148,24 @@ def imprimir_resultado(result):
         print "**  La palabra: ", result['palabra'], " NO ha sido encontrada."
         print "**********************************************************************\n"
 
+def mostrar_sopa(sopa):
+    n = len(sopa)
+    m = len(sopa[0])
+    
+    print "   ",
+
+    for j in range(m):
+        print " ",j,
+    
+    print "\n\n",
+
+    for i in range(n):
+        print " ",i, " ",
+        for j in range(m):
+            print sopa[i][j], " ",
+        print "\n",
+
+    print "\n\n",
 
 ''' 
 # --- MAIN --------------------------------
